@@ -70,11 +70,12 @@ if(defined('STDIN') || (empty($_SERVER['REMOTE_ADDR']) && !isset($_SERVER['HTTP_
       }
 
       foreach ($numbers as $key => $number) {
-        $result = TelephoneNumberGrader::analyseNumber($number);
-
         if ($number == "") {
           continue;
         }
+        $result = TelephoneNumberGrader::analyseNumber($number);
+
+
 
         //During processing loop
         switch ($outputType) {

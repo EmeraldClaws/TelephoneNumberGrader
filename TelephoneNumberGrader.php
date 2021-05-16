@@ -42,6 +42,8 @@ class TelephoneNumberGrader {
 
 		$numberValue = array("value" => 0, "subValue" => 0, "reason" => []);
 
+		if (substr($number, 0, 1) == "+")
+			$number = substr($number, 1);
 		foreach ($functionArray as $test) {
 			TelephoneNumberGrader::getInstance()->$test($number, $numberValue);
 		}
@@ -287,9 +289,7 @@ class TelephoneNumberGrader {
 	public function formatNumber($number){
 		//Returns an array representing the format for displaying a UK number.
 
-		//Cut leading +/44/0 off
-		if (substr($number, 0, 1) == "+")
-			$number = substr($number, 1);
+		//Cut leading 44/0 off
 		if (substr($number, 0, 1) == "0")
 			$number = substr($number, 1);
 		if (substr($number, 0, 2) == "44")
@@ -391,13 +391,13 @@ class TelephoneNumberGrader {
 						break;
 
 					default:
-						error_log("ERROR: formatNumber - Unrecognised Number: $number");
+						error_log("ERROR: formatNumber - Unrecognised Number: '$number'");
 						break;
 				}
 				break;
 			
 			default:
-				error_log("ERROR: formatNumber - The number $number was not recognised");
+				error_log("ERROR: formatNumber - The number '$number' was not recognised");
 				exit;
 				break;
 		}
